@@ -1,0 +1,4 @@
+[irontec]
+name=Irontec RPMs repository
+baseurl=http://packages.irontec.com/centos/$releasever/$basearch/
+gpgkey=http://packages.irontec.com/public.key

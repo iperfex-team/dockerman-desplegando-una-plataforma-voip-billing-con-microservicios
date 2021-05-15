@@ -1,0 +1,37 @@
+SHELL=/bin/bash
+PATH=/sbin:/bin:/usr/sbin:/usr/bin
+MAILTO=root
+
+# min	hour	day	month	weekday	command
+
+# update the currency table
+  0     6       *       *       * php /usr/share/a2billing/latest/Cronjobs/currencies_update_yahoo.php
+
+# manage the monthly services subscription
+  0     6       1       *       * php /usr/share/a2billing/latest/Cronjobs/a2billing_subscription_fee.php
+
+# Check the account of each user and send an email if the balance is below mimimum.
+  0     *       *       *       * php /usr/share/a2billing/latest/Cronjobs/a2billing_notify_account.php
+
+# Browse all the DID's that are reserved and check if the customer need to pay.
+# Bill them or warn them via email that they need to pay in order to keep their DIDs.
+  0     2       *       *       * php /usr/share/a2billing/latest/Cronjobs/a2billing_bill_diduse.php
+
+# This script will take care of the recurring service.
+  0     12      *       *       * php /usr/share/a2billing/latest/Cronjobs/a2billing_batch_process.php
+
+# Generate invoices and for each user
+  0     6       *       *       * php /usr/share/a2billing/latest/Cronjobs/a2billing_batch_billing.php
+
+# Process the autodialer.
+  */5   *       *       *       * php /usr/share/a2billing/latest/Cronjobs/a2billing_batch_autodialer.php
+
+# Manage alarms
+  0     *       *       *       * php /usr/share/a2billing/latest/Cronjobs/a2billing_alarm.php
+
+# Manage archive
+  0     12      *       *       * php /usr/share/a2billing/latest/Cronjobs/a2billing_archive_data_cront.php
+
+#Autorefill
+  0     10      21      *       * php /usr/share/a2billing/latest/Cronjobs/a2billing_autorefill.php
+  15    *       *       *       * php /usr/share/a2billing/latest/Cronjobs/a2billing_batch_cache.php

@@ -9,6 +9,8 @@ services:
       - /etc/localtime:/etc/localtime:ro
       - /root/billing/user-data/database:/var/lib/mysql
       - /root/billing/sql/a2billing.sql:/docker-entrypoint-initdb.d/1-init.sql
+    ports:
+      - 3306:3306
     environment:
       MYSQL_ROOT_PASSWORD: jao6meft2vmofx0tofjJAd424
       MYSQL_DATABASE: a2billing

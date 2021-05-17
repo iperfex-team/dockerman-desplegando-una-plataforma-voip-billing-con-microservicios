@@ -62,9 +62,9 @@ sed -i "s/_IP_DOCKER_LAN_/`ip r |grep eth1 | cut -d'/' -f1`\/255.255.0.0/g" "/et
 FILE=/etc/a2binstall
 if [ ! -f "$FILE" ]; then
     echo "$FILE does not exist."
-    sleep 15 && echo "UPDATE cc_config SET config_value = '${MANAGER_HOST}' WHERE id=8;" | isql a2billing &
-    sleep 15 && echo "UPDATE cc_config SET config_value = '${MANAGER_USER}' WHERE id=9;" | isql a2billing &
-    sleep 15 && echo "UPDATE cc_config SET config_value = '${MANAGER_PASSWORD}' WHERE id=10;" | isql a2billing &
+    sleep 15 && echo "UPDATE cc_config SET config_value = '${MANAGER_HOST}' WHERE id=8;" | isql a2b &
+    sleep 15 && echo "UPDATE cc_config SET config_value = '${MANAGER_USER}' WHERE id=9;" | isql a2b &
+    sleep 15 && echo "UPDATE cc_config SET config_value = '${MANAGER_PASSWORD}' WHERE id=10;" | isql a2b &
     echo "yes" > /etc/a2binstall
 fi
 

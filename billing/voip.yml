@@ -1,0 +1,27 @@
+version: '2'
+services:
+
+  a2b-voip:
+    privileged: true
+    container_name: a2b-voip
+    hostname: a2b-voip
+    image: cnsoluciones/a2b-voip:13.38.2
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - /run/dbus/system_bus_socket:/run/dbus/system_bus_socket
+      - /root/billing/user-data/asterisk/conf:/etc/asterisk
+      #- /root/billing/custom_iptables:/etc/custom_iptables:ro
+    environment:
+      MYSQL_HOST: 127.0.0.1
+      MYSQL_PORT: 3306
+      MYSQL_DATABASE: a2billing
+      MYSQL_USER: a2buser
+      MYSQL_PASSWORD: o2kftr7eM9dkxm33Ksfm9OaL
+      MANAGER_HOST: 127.0.0.1
+      MANAGER_USER: a2b-voip
+      MANAGER_PASSWORD: jaaaJsjdjJHDWWH23HD2jsirvmA2
+      ASTERISK_IP: 142.93.190.174
+      FAIL2BAN: 'true'
+      CUSTOM_IPTABLES: 'false'
+    restart: always
+    network_mode: host

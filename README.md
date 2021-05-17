@@ -4,7 +4,7 @@
 
 ```bash
 apt update
-apt -y install vim curl screen mc git unzip net-tools links2 sudo nmap make mycli ufw
+apt -y install vim curl screen mc git unzip net-tools links2 sudo nmap make mycli ufw htop
 ```
 
 ## Instalando Docker

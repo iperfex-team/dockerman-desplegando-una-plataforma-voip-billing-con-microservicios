@@ -1,0 +1,88 @@
+version: '2'
+services:
+
+
+  a2b-mysql:
+    container_name: a2b-mysql
+    image: mysql:5.6
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - /root/billing/user-data/database:/var/lib/mysql
+      - /root/billing/sql/a2billing.sql:/docker-entrypoint-initdb.d/1-init.sql
+    environment:
+      MYSQL_ROOT_PASSWORD: jao6meft2vmofx0tofjJAd424
+      MYSQL_DATABASE: a2billing
+      MYSQL_USER: a2buser
+      MYSQL_PASSWORD: o2kftr7eM9dkxm33Ksfm9OaL
+    restart: always
+    networks:
+      bridge:
+
+  a2b-http-admin:
+    container_name: a2b-http-admin
+    image: cnsoluciones/a2b-http-admin:2.2.0
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - /root/billing.iperfex.com/user-data/asterisk/conf:/etc/asterisk
+    expose:
+      - 80
+      - 443
+    environment:
+      TIMEZONE: America/Argentina/Buenos_Aires
+      MYSQL_HOST: a2b-mysql
+      MYSQL_PORT: 3306
+      MYSQL_ROOT_PASSWORD: jao6meft2vmofx0tofjJAd424
+      MYSQL_DATABASE: a2billing
+      MYSQL_USER: a2buser
+      MYSQL_PASSWORD: o2kftr7eM9dkxm33Ksfm9OaL
+      VIRTUAL_PROTO: https
+      VIRTUAL_PORT: 443
+      VIRTUAL_HOST: billingdemo01.duckdns.org
+      LETSENCRYPT_HOST: billingdemo01.duckdns.org
+      LETSENCRYPT_EMAIL: cursos@iperfex.com
+    depends_on:
+      - a2b-mysql
+    links:
+      - a2b-mysql
+    restart: always
+    networks:
+      bridge:
+      proxy:
+
+  a2b-http-customer:
+    container_name: a2b-http-customer
+    image: cnsoluciones/a2b-http-customer:2.2.0
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+    expose:
+      - 80
+      - 443
+    environment:
+      TIMEZONE: America/Argentina/Buenos_Aires
+      MYSQL_HOST: a2b-mysql
+      MYSQL_PORT: 3306
+      MYSQL_ROOT_PASSWORD: jao6meft2vmofx0tofjJAd424
+      MYSQL_DATABASE: a2billing
+      MYSQL_USER: a2buser
+      MYSQL_PASSWORD: o2kftr7eM9dkxm33Ksfm9OaL
+      VIRTUAL_PROTO: https
+      VIRTUAL_PORT: 443
+      VIRTUAL_HOST: customer01.duckdns.org
+      LETSENCRYPT_HOST: customer01.duckdns.org
+      LETSENCRYPT_EMAIL: info@iperfex.com
+    depends_on:
+      - a2b-mysql
+    links:
+      - a2b-mysql
+    restart: always
+    networks:
+      bridge:
+      proxy:
+
+networks:
+
+  bridge:
+
+  proxy:
+    external:
+      name: NGINX_PROXY

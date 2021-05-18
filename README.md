@@ -2,13 +2,13 @@
 
 # Webinar - DockerMAN: desplegando una plataforma VoIP Billing con Microservicios
 
-Webinar hands-on de cómo transformar a traves de Docker, una plataforma voip billing que antes podia instalarse en un solo servidor(o maquina virtual) o en 4 maquinas virtuales(para hacerlo escalable) a crear y desplegar microservicios en un solo servidor donde tendremos un Servidor Web, Base de Datos, Asterisk +N(más de 1), FastAGI. Mejorando la performance, logrando que sea escalable (desplegando la cantidad de contenedores que necesitemos) y que sea mas Seguro. El Poder de Docker!!!
+Webinar hands-on de cómo transformar a través de Docker, una plataforma VoIP billing que antes podía instalarse en un solo servidor (o máquina virtual) o en 4 máquinas virtuales (para hacerlo escalable) a crear y desplegar microservicios en un solo servidor donde tendremos un Servidor Web, Base de Datos, Asterisk +N (más de 1), FastAGI. Mejorando la performance, logrando que sea escalable (desplegando la cantidad de contenedores que necesitemos) y que sea más Seguro. El Poder de Docker!!!
 
 Para ellos vamos a utilizar :
+
 - Docker para desplegar: Asterisk, Nginx y MariaDB. Se utiliza Debian como sistema base.
 
-
-**Nota: El objetivo es mostrar las transformacion de una plataforma voip a microservicios y no la plataforma billing en si misma.**
+**Nota: El objetivo es mostrar las transformación de una plataforma VoIP a microservicios y no la plataforma billing en si misma.**
 
 
 ![webinar](https://github.com/iperfex-team/dockerman-desplegando-una-plataforma-voip-billing-con-microservicios/blob/main/dockerman-webina-billing.png)
